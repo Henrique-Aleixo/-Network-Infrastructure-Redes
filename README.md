@@ -85,11 +85,19 @@ At this stage, 2 Core switches were created, one exclusively for the Lisbon bran
 
 Next, Copper Cross-Over cables were used to connect the Switches to the Core, establishing GigabitEthernet connections. Additionally, Trunk ports were configured for each Core.
 
--configure terminal
--interface gigabitEthernet (port number)
--switchport mode trunk
--switchport trunk allowed vlan (VLAN number)
--end
+- configure terminal
+- interface gigabitEthernet (port number)
+- switchport mode trunk
+- switchport trunk allowed vlan (VLAN number)
+- end
+
+Lisbon Branch Core
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/66ba06fa-7b5c-4e62-9045-ca5f60aa2b39)
+
+Remaining Branches Core
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/791aacaa-25da-4534-a4bd-18b5c248eae5)
 
 ## **Gateway Creation**
 At this stage, VLAN interfaces were created on the Core, using the base address 172.16.0.0 and adapting according to the type of department.
@@ -119,3 +127,43 @@ To enable communication between servers and VLANs appropriately, the servers lis
 Additionally, a VLAN70 named "Server" was created on the switch connected to the various servers and correspondingly on the Core switches.
 
 Here are the configurations for each type of server:
+
+### **DHCP Server**
+The DHCP (Dynamic Host Configuration Protocol) service automates the assignment of IPv4 addresses, subnet masks, gateways, and other network parameters. At this stage, the six services corresponding to the available departments were created, as the other PCs will be using a DHCP connection.
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/12512a33-fb06-4f3e-9779-052a7bcb0fe4)
+
+Right after the services were created, the IPv4 Gateway/DNS settings were changed to DHCP on each computer.
+
+### **DNS Server**
+It is a hierarchical and distributed system for managing names for computers, services, or any machine connected to the Internet or a private network. It associates various pieces of information with domain names and each participating entity.
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/7ec5e158-b6b0-4cba-a5d9-e836fca5a87e)
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/6da0c666-1b1f-4741-b519-39071989fcdc)
+
+### **FTP Server**
+It is a standard/generic and hardware-independent protocol that allows the transfer of files.
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/89375bd1-072d-4284-9fd9-76ddb9039708)
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/8d29a463-eacc-4bbd-920c-2924980573fb)
+
+### **TFTP Server**
+It is a very simple file transfer protocol, similar to FTP, through which it is also possible to save backup configuration files of devices.
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/4a541c23-0591-4647-a87b-5aba5db868d8)
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/4735ab7c-a293-450e-8509-51a363266553)
+
+## **Default Routes and NAT Server**
+A default route and VLAN80 were added to the core, as well as the configuration of NAT on the ISP (ISR4331). To make this process executable, a configuration was performed on the second ISR4331 named INTERNET, including a loopback interface. Finally, the routes were set on the ISP with the appropriate IPs.
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/d1ca7fe6-baef-44a3-a852-9b57f97fc7c8)
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/facd29ce-d39d-498b-bb9b-371757117143)
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/f0fe485e-67f3-48ec-862a-1ff648bc63a2)
+
+## **Connectivity Tests**
+Connectivity tests were conducted through the command prompt of the PCs using the examples below, yielding the following results:
+
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/055fef6d-14fa-484f-ba46-366064d77918)
+![image](https://github.com/Henrique-Aleixo/Network-Infrastructure-Redes/assets/95305819/6b588dcc-85ed-4860-bf9a-1c12c782782f)
+
+Other connectivity tests were also performed between PCs of the same department in the same branch or different branches, among others, and no problems were detected.
